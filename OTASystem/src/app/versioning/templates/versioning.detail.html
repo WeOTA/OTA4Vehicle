@@ -1,0 +1,80 @@
+<div class="list_content">
+  <div class="panel panel-default">
+
+    <div class="panel-heading i_release_panel">
+      <ol class="breadcrumb">
+        <li><a ui-sref="versioning.list"><span class="glyphicon glyphicon-backward"></span></a></li>
+        <li class="active"> {{versioningDetail.reportInfo.data.versionname}}</li>
+      </ol>
+    </div>
+    <div class="panel-body">
+      <p>
+        <span class="sub-title">versionName:</span>
+        <span class="sub-content">{{versioningDetail.reportInfo.data.versionname}}</span>
+      </p>
+      <p>
+        <span class="sub-title">versionCode:</span>
+        <span class="sub-content">{{versioningDetail.reportInfo.data.versioncode}}</span>
+      </p>
+      <p>
+        <span class="sub-title">buildNumber:</span>
+        <span class="sub-content">{{versioningDetail.reportInfo.data.buildnumber}}</span>
+      </p>
+
+      <p>
+        <span class="sub-title">描述:</span>
+        <div class="sub-content-block">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <p class="sub-text">{{versioningDetail.reportInfo.data.description}}</p>
+    </div>
+  </div>
+</div>
+</p>
+
+<p>
+  <span class="sub-title">上传时间:</span>
+  <span class="sub-content">{{versioningDetail.reportInfo.data.time | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+</p>
+<p>
+  <span class="sub-title">发布时间:</span>
+  <span class="sub-content">{{versioningDetail.reportInfo.data.timerelease | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+</p>
+<p>
+  <span class="sub-title">停止发布时间:</span>
+  <span class="sub-content">{{versioningDetail.reportInfo.data.timereleaseend | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+</p>
+<p>
+  <span class="sub-title">当前状态:</span>
+  <span class="sub-content text-danger">{{versioningDetail.reportInfo.data.status | transitionStatus}}</span>
+</p>
+<p>
+  <span class="sub-title">升级包:</span>
+<div class="sub-content-block">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th>升级包名称</th>
+      <th>升级包大小</th>
+      <th>升级包MD5</th>
+      <th>下载地址</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{versioningDetail.reportInfo.data.packageName}}</td>
+      <td>{{versioningDetail.reportInfo.data.packageSize}}</td>
+      <td>{{versioningDetail.reportInfo.data.packageMD5}}</td>
+      <td><a href="{{versioningDetail.reportInfo.data.packageUrl}}">下载</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</p>
+<p>
+  <span class="sub-title">灰度发布范围:</span>
+  <span class="sub-content">{{versioningDetail.reportInfo.data.publishcount}} 台车机</span>
+</p>
+</div>
+</div>
+</div>

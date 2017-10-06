@@ -1,0 +1,33 @@
+<div class="modal-header modal_header_padding">
+    <label><span class="glyphicon glyphicon-exclamation-sign"></span>确认提交如下信息：</label>
+</div>
+<div class="modal-body">
+    <p>
+        <span class="sub-title">versionName:</span>
+        <span class="sub-content">{{data.versionname}}</span>
+    </p>
+    <p>
+        <span class="sub-title">versionCode:</span>
+        <span class="sub-content">{{data.versioncode}}</span>
+    </p>
+    <p>
+        <span class="sub-title">buildNumber:</span>
+        <span class="sub-content">{{data.buildnumber}}</span>
+    </p>
+    <p>
+        <span class="sub-title">md5值:</span>
+        <span class="sub-content">{{data.md5}}</span>
+    </p>
+  <p>
+    <span class="sub-title">版本说明:</span>
+    <span class="sub-content">{{data.description}}</span>
+  </p>
+    <p>
+        <span class="sub-title">文件:</span>
+        <span class="sub-content">{{data.file.name}}</span>
+    </p>
+</div>
+<div class="modal-footer">
+    <button  class="btn btn-primary" type="button" ng-click="ok()" >确认提交</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+</div>

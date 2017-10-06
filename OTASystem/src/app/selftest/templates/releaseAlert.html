@@ -1,0 +1,20 @@
+<div class="modal-header modal_header_padding">
+    <label>确认发布如下用户：</label>
+</div>
+<div class="modal-body">
+
+    <p style="padding-left: 30px;" ng-repeat = "id in data.wecarId">
+        wecarId: {{id}}
+    </p>
+    <p style="padding-left: 30px;"  ng-if="data.wecarId.length">
+        共计：{{data.wecarId.length}}个用户。
+    </p>
+    <p style="padding-left: 30px;"  ng-if="!data.wecarId.length">
+        请选择用户！
+    </p>
+</div>
+<div class="modal-footer">
+    <button ng-if="!data.wecarId.length" disabled="disabled" class="btn btn-primary" type="button" >发布</button>
+    <button ng-if="data.wecarId.length" class="btn btn-primary" type="button" ng-click="ok()" >发布</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+</div>

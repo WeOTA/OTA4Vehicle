@@ -1,0 +1,200 @@
+<div class="list_content">
+  <div class="panel panel-default">
+    <ol class="breadcrumb">
+      <li><a ui-sref="releases.list"><span class="glyphicon glyphicon-backward"></span></a></li>
+      <li class="active">{{releasesDetail.versionDetail.tasSysName}} {{releasesDetail.versionDetail.version}}</li>
+    </ol>
+    <div class="panel-heading i_release_panel">
+      <p>
+        <span class="sub-title">versionName:</span>
+        <span class="sub-content">{{releasesDetail.versionDetail.versionname}}</span>
+      </p>
+
+      <p>
+        <span class="sub-title">versionCode:</span>
+        <span class="sub-content">{{releasesDetail.versionDetail.versioncode}}</span>
+      </p>
+      <p>
+        <span class="sub-title">buildNumber:</span>
+        <span class="sub-content">{{releasesDetail.versionDetail.buildnumber}}</span>
+      </p>
+      <p>
+        <span class="sub-title">上传时间:</span>
+        <span class="sub-content">{{releasesDetail.versionDetail.time | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+      </p>
+      <p>
+        <span class="sub-title">升级包:</span>
+        <span ng-init="isCollapsed = 'false'" class="sub-content" ng-click="isCollapsed = !isCollapsed"><span
+          style="cursor: pointer;" class="glyphicon glyphicon-collapse-down"></span></span>
+      <div uib-collapse="isCollapsed">
+        <div class="sub-content-block sub-content-postion">
+          <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+              <th>升级包名称</th>
+              <th>升级包大小</th>
+              <th>升级包MD5</th>
+            </tr>
+            </thead>
+            <tbody>
+              <td>{{releasesDetail.versionDetail.packageName}}</td>
+              <td>{{releasesDetail.versionDetail.packageSize |transitionMB}}MB</td>
+              <td>{{releasesDetail.versionDetail.packageMD5}}</td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </p>
+      <div class="i_release_btn">
+        <button ng-click="releasesDetail.release(releasesDetail.versionDetail.module)" type="button"
+                class="btn btn-danger">发布
+        </button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <label>用户选择：</label>
+          <uib-tabset>
+            <uib-tab heading="条件 检索">
+              <form ng-submit="releasesDetail.searching()" method="POST" role="form">
+                <div class="row row_top">
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="form-group">
+                      <select ng-model="releasesDetail.channel" name="" id="input" class="form-control"
+                              required="required">
+                        <option value="">请选择渠道：</option>
+                        <option ng-repeat="(key, value) in releasesDetail.searchCondition.channel" value="{{value}}">
+                          {{value}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <button type="submit" class="btn btn-primary">搜索</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <h5 class="text-right"><span class="glyphicon glyphicon-flag"></span> 拖动选择灰度范围：</h5>
+                  </div>
+                  <div style="padding-top: 6px;" class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                    <input ng-model="releasesDetail.percent" style="cursor: pointer;" type="range" name="range"
+                           id="input" value="100" min="0" max="100" step="10" title="">
+
+                  </div>
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <h5 class="text-left">{{releasesDetail.percent}}%</h5>
+                  </div>
+
+                </div>
+              </form>
+            </uib-tab>
+            <uib-tab heading="WECARID 检索">
+              <form ng-submit="releasesDetail.search()" method="POST" role="form">
+                <div class="row row_top">
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <input type="text" ng-model="releasesDetail.wecarId" name="wecarId" id="input" class="form-control"
+                           value="" required="required" placeholder="24位WECARID" pattern="\w{24}" title="">
+                  </div>
+
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 btn_seach">
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </uib-tab>
+          </uib-tabset>
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>
+                <div class="checkbox icheckbox">
+                  <label>
+                    <input type="checkbox" ng-model="releasesDetail.upgradedall"
+                           ng-click="releasesDetail.checkUpgradedAll($event)" value="checkall">已升级({{releasesDetail.wecarUpgradedList.length}})
+                  </label>
+                </div>
+
+              </th>
+              <th>WECARID</th>
+              <th>渠道</th>
+              <th>版本</th>
+              <th>升级否 <span ng-init="isUpgradedDisplay = 'true'" ng-click="isUpgradedDisplay=!isUpgradedDisplay" title="折叠" class="glyphicon glyphicon-collapse-down"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-if="isUpgradedDisplay"  ng-repeat="item in releasesDetail.wecarUpgradedListShow" class="active">
+              <td>
+                <div class="checkbox icheckbox">
+                  <label>
+                    <input ng-model="item.selected" ng-click="releasesDetail.thisUpgradedCheck($event,item)"
+                           type="checkbox" value="idcheck">
+                  </label>
+                </div>
+              </td>
+              <td>{{item._id}}</td>
+              <td>{{item.channel}}</td>
+              <td>{{item.appVersion ? item.appVersion : "-"}}</td>
+              <td>{{item.hasUpgrade ? "是" : "否"}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div ng-if="releasesDetail.totalItems">
+            <uib-pagination total-items="releasesDetail.totalUpgradedItems"
+                            ng-model="releasesDetail.currentUpgradedPage" max-size="releasesDetail.maxSize"
+                            class="pagination-sm" boundary-links="true" rotate="false"
+                            ng-change="releasesDetail.upgradedPageChanged()"></uib-pagination>
+          </div>
+        </div>
+
+        <div class="panel-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>
+                <div class="checkbox icheckbox">
+                  <label>
+                    <input type="checkbox" ng-model="releasesDetail.unUpgradedAll"
+                           ng-click="releasesDetail.checkUnUpgradedAll($event)" value="checkall">未升级({{releasesDetail.wecarUnUpgradedList.length}})
+                  </label>
+                </div>
+              </th>
+              <th>WECARID</th>
+              <th>渠道</th>
+              <th>版本</th>
+              <th>升级否<span ng-init="isUnUpgradedDisplay = 'false'" ng-click="isUnUpgradedDisplay=!isUnUpgradedDisplay" title="折叠" class="glyphicon glyphicon-collapse-down"></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-if="isUnUpgradedDisplay" ng-repeat="item in releasesDetail.wecarUnUpgradedListShow" class="active">
+              <td>
+                <div class="checkbox icheckbox">
+                  <label>
+                    <input ng-model="item.selected" ng-click="releasesDetail.thisUnUpgradedCheck($event,item)"
+                           type="checkbox" value="idcheck">
+                  </label>
+                </div>
+              </td>
+              <td>{{item._id}}</td>
+              <td>{{item.channel}}</td>
+              <td>{{item.appVersion ? item.appVersion : "-"}}</td>
+              <td>{{item.hasUpgrade ? "是" : "否"}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div ng-if="releasesDetail.totalItems">
+            <uib-pagination total-items="releasesDetail.totalUnUpgradedItems"
+                            ng-model="releasesDetail.currentUnUpgradedPage" max-size="releasesDetail.maxSize"
+                            class="pagination-sm" boundary-links="true" rotate="false"
+                            ng-change="releasesDetail.unUpgradedPageChanged()"></uib-pagination>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>

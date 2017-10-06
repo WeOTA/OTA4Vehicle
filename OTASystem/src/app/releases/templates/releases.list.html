@@ -1,0 +1,58 @@
+<div class="list_content">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<label>版本列表：</label>
+				</div>
+			   	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 ">
+			   		<form ng-submit="releasesList.search()" method="POST" role="form">
+			   			<div class="row">
+			   				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-lg-offset-4">
+			   					<input type="text" name="versionname" id="input" class="form-control" ng-model="releasesList.versionname" placeholder="versionname">
+			   				</div>
+
+			   				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 btn_seach">
+			   					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+			   				</div>
+			   			</div>
+			   		</form>
+			   	</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<table class="table table-hover ">
+				<thead>
+					<tr>
+            <th>versionName</th>
+            <th>versionCode</th>
+            <th>buildNumber</th>
+            <th>上传时间</th>
+            <th>发布时间</th>
+            <th>停止发布时间</th>
+            <th>当前状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in releasesList.versionList.data" class="active">
+            <td>{{item.versionname}}</td>
+            <td>{{item.versioncode}}</td>
+            <td>{{item.buildnumber}}</td>
+            <td>{{item.time | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{item.timerelease | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{item.timereleaseend | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{item.status | transitionStatus}}</td>
+						<td>
+							<a ui-sref="releases.detail({versionname:item.versionname})" class="btn btn-primary btn-xs" role="button">灰度发布</a>
+              <button   type="button" ng-click="releasesList.stop(item)" class="btn btn-primary btn-xs " >停止发布</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div ng-if="releasesList.totalItems">
+				<uib-pagination total-items="releasesList.totalItems" ng-model="releasesList.currentPage" max-size="releasesList.maxSize" class="pagination-sm" boundary-links="true" rotate="false" ng-change="releasesList.pageChanged()"></uib-pagination>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="panel panel-default panel_margin">
+		  <div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<h3 class="panel-title"><span class="glyphicon glyphicon-list-alt"></span> 用户组列表</h3>
+				</div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <select name="" ng-model="usergroup.type" id="product" ng-change="usergroup.changeHint()" class="form-control" required="required">
+            <option value="">硬件商</option>
+            <option ng-repeat="(key, value) in usergroup.productType" value="{{key}}">{{value}}</option>
+          </select>
+        </div>
+
+			</div>
+		  </div>
+		  <div class="panel-body">
+				<div class="row">
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title panel-title-s"><span title="新增分组" class="glyphicon glyphicon-plus-sign"></span><span ng-click="isDisplay=!isDisplay" title="删除分组" class="glyphicon glyphicon-minus-sign"></span></h3>
+							</div>
+							<div class="panel-body">
+								<div class="list-group">
+									<div ng-repeat="(key,value) in usergroup.searchCondition.userLevel" class="list_item">
+										<a  style="cursor: pointer;"  ng-click="usergroup.goList(key)" class="list-group-item">{{value}}</a>
+										<span ng-if="isDisplay" class="glyphicon glyphicon-trash"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div ui-view class="col-xs-10 col-sm-10 col-md-10 col-lg-10 slide"></div>
+				</div>
+		  </div>
+	</div>
+</div>

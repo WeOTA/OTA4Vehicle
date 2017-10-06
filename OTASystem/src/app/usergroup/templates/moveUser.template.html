@@ -1,0 +1,26 @@
+<form ng-submit="ok()" method="POST" role="form">
+	<div class="modal-header modal_header_padding">
+	    <label>请选择用户组：</label>
+	    <div class="row" style="padding-left: 20px;">
+	    	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+	    		<div class="form-group">
+	    			<select ng-model="toGroup" name="" id="input" class="form-control" required="required">
+	    				<option value="">请选择：</option>
+	    				<option ng-repeat="(key, value) in searchCondition.userLevel" value="{{key}}">{{value}}</option>	
+	    			</select>
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+	<div class="modal-body">
+		<label style="padding-left: 20px;">选择的用户：</label>
+	    <p style="padding-left: 30px;" ng-repeat="one in destwecarids">
+	        wecarID: {{one}}
+	    </p>
+	</div>
+	<div class="modal-footer">
+	    <button ng-if="destwecarids.length" class="btn btn-primary" type="submit">确定</button>
+	    <button ng-if="!destwecarids.length" class="btn btn-primary" type="button" disabled="disabled" >确定</button>
+	    <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+	</div>
+</form>

@@ -1,0 +1,144 @@
+<div class="list_content">
+  <div class="panel panel-default">
+    <ol class="breadcrumb">
+      <li><a ui-sref="pmcontrol.list"><span class="glyphicon glyphicon-backward"></span></a></li>
+      <li class="active">{{pmcontrolDetail.versionDetail.tasSysName}} {{pmcontrolDetail.versionDetail.version}}</li>
+    </ol>
+    <div class="panel-heading i_release_panel">
+      <p>
+        <span class="sub-title">类型:</span>
+        <span class="sub-content">{{pmcontrolDetail.versionDetail.module}}</span>
+      </p>
+
+      <p>
+        <span class="sub-title">系统名称:</span>
+        <span class="sub-content">{{pmcontrolDetail.versionDetail.tasSysName}}</span>
+      </p>
+      <p>
+        <span class="sub-title">版本号:</span>
+        <span class="sub-content">{{pmcontrolDetail.versionDetail.version}}</span>
+      </p>
+      <p ng-if="pmcontrolDetail.versionDetail.minSysVer">
+        <span class="sub-title">最小系统版本:</span>
+        <span class="sub-content">{{pmcontrolDetail.versionDetail.minSysVer}}</span>
+      </p>
+      <p>
+        <span class="sub-title">用户选择:</span>
+        <span class="sub-content">内测</span>
+      </p>
+      <p>
+        <span class="sub-title">时间:</span>
+        <span class="sub-content">{{pmcontrolDetail.versionDetail.time | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+      </p>
+      <p>
+        <span class="sub-title">升级包:</span>
+        <span ng-init="isCollapsed = 'false'" class="sub-content" ng-click="isCollapsed = !isCollapsed"><span
+          style="cursor: pointer;" class="glyphicon glyphicon-collapse-down"></span></span>
+      <div uib-collapse="isCollapsed">
+        <div class="sub-content-block sub-content-postion">
+          <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+              <th>升级包名称</th>
+              <th>升级包大小</th>
+              <th>升级包MD5</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in pmcontrolDetail.versionDetail.packages">
+              <td>{{item.packageName}}</td>
+              <td>{{item.packageSize |transitionMB}}MB</td>
+              <td>{{item.packageMD5}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </p>
+      <div class="i_release_btn">
+        <button ng-click="pmcontrolDetail.relase(pmcontrolDetail.versionDetail.module)" type="button"
+                class="btn btn-danger">下发到车机
+        </button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+              <label>用户选择：</label>
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 ">
+              <form ng-submit="pmcontrolDetail.seach()" method="POST" role="form">
+                <div class="row">
+                  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-lg-offset-4">
+                    <input type="text" ng-model="pmcontrolDetail.wecarId" name="wecarId" id="input" class="form-control"
+                           value="" placeholder="WECARID" pattern="\w{24}" title="">
+                  </div>
+
+                  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 btn_seach">
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>
+                <div class="checkbox icheckbox">
+                  <label>
+                    <input ng-model="pmcontrolDetail.all" type="checkbox" ng-click="pmcontrolDetail.checkall($event)"
+                           value="checkall">全选
+                  </label>
+                </div>
+              </th>
+              <th>WECARID</th>
+              <th>用户类型</th>
+              <th>渠道</th>
+              <th>当前版本</th>
+              <th>GPS版本</th>
+              <th>协议卡版本</th>
+              <th>硬件版本</th>
+              <th>MCU版本</th>
+              <th>升级否</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in pmcontrolDetail.wecarList.data" class="active">
+              <td>
+                <div class="checkbox icheckbox">
+                  <label>
+                    <input ng-model="item.selected" ng-click="pmcontrolDetail.thisCheck($event,item._id)"
+                           type="checkbox" value="idcheck">
+                  </label>
+                </div>
+              </td>
+              <td>{{item._id}}</td>
+              <td>内测</td>
+              <td>{{item.channel}}</td>
+              <td>{{item.currentTasSysVer}}</td>
+              <td>{{item.currentTasGpsVer ? item.currentTasGpsVer : "-"}}</td>
+              <td>{{item.currentTasProtoCardVer ? item.currentTasProtoCardVer : "-"}}</td>
+              <td>{{item.hardwareVer}}</td>
+              <td>{{item.currentTasMcuVer}}</td>
+              <td>{{item.hasUpgrade ? "是" : "否"}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div ng-if="pmcontrolDetail.totalItems">
+            <uib-pagination total-items="pmcontrolDetail.totalItems" ng-model="pmcontrolDetail.currentPage"
+                            max-size="pmcontrolDetail.maxSize" class="pagination-sm" boundary-links="true"
+                            rotate="false" ng-change="pmcontrolDetail.pageChanged()"></uib-pagination>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

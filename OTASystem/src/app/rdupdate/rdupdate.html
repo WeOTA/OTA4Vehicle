@@ -1,0 +1,61 @@
+<div class="container">
+	<div class="list_content">
+		<div class="panel panel-default">
+
+			<div class="panel-body">
+				<form ng-submit="rdupdate.submit()" name="form" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label  class="col-sm-2 control-label">versionName：</label>
+							<div class="col-sm-6">
+								<input ng-model="rdupdate.versionname"  type="text" placeholder="如：1.0.0" name="version" required="required" value="" class="form-control">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label  class="col-sm-2 control-label">versionCode：</label>
+							<div class="col-sm-6">
+								<input ng-model="rdupdate.versioncode"  type="text" placeholder="如：100000" name="version" required="required" value="" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label  class="col-sm-2 control-label">buildNumber：</label>
+							<div class="col-sm-6">
+								<input ng-model="rdupdate.buildnumber"  type="text" placeholder="如：1111" name="version"  value="" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label  class="col-sm-2 control-label">MD5值：</label>
+							<div class="col-sm-6">
+								<input ng-model="rdupdate.md5" type="text" placeholder="如：f06d617393633e3524ba80db998718b5" required="required" name="version" value="" class="form-control">
+							</div>
+						</div>
+          <div class="form-group">
+            <label  class="col-sm-2 control-label">版本说明：</label>
+            <div class="col-sm-6">
+              <input ng-model="rdupdate.description"  type="text" placeholder="如：test" name="version" required="required" value="" class="form-control">
+            </div>
+          </div>
+
+						<div class="form-group">
+							<label  class="col-sm-2 control-label">文件：</label>
+							<div class="col-sm-6">
+								<input ng-change="rdupdate.proChange()"  ngf-select ng-model="rdupdate.file" type="file" class="file" required="required" ngf-accept="'aplication/zip'">
+							</div>
+						</div>
+						<div ng-if="rdupdate.progress" class="form-group">
+							<div class="col-sm-6 col-sm-offset-2">
+								<uib-progressbar class="progress-striped active" value="rdupdate.progress" type=success"">{{rdupdate.progress}}%</uib-progressbar>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-sm-1 col-sm-offset-7">
+								<button type="submit" class="btn btn-primary">提交</button>
+							</div>
+						</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<div class="modal-header modal_header_padding">
+    <label>
+        请填写验收报告：
+    </label>
+</div>
+
+<div class="modal-body">
+    <textarea  placeholder=""  name="testText" id="inputTestText" class="form-control textarea_style" rows="3" ng-model="reportText" required="required"></textarea>
+</div>
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <button ng-if="reportText"  class="btn btn-primary" type="button" ng-click="refuse()">打回</button>
+            <button ng-if="!reportText"  class="btn btn-primary" type="button" disabled="disabled">打回</button>
+        </div>
+        <div class="col-xs-11 col-sm-11 col-md-10 col-lg-11">
+            <button ng-if="reportText"  class="btn btn-primary" type="button" ng-click="ok()">提交PM验收</button>
+            <button ng-if="!reportText"  class="btn btn-primary" type="button" disabled="disabled">提交PM验收</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </div>
+
+</div>

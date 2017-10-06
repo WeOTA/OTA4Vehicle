@@ -1,0 +1,17 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <a  class="navbar-brand" ui-sref="home">OTA-RM</a>
+
+    <ul class="nav navbar-nav">
+      <li ng-class="{active: $state.includes('rdupdate')}"><a ui-sref="rdupdate">组件更新</a></li>
+      <li ng-class="{active: $state.includes('releases')}"><a ui-sref="releases.list">发布管理</a></li>
+      <li ng-class="{active: $state.includes('versioning')}"><a ui-sref="versioning.list">版本管理</a></li>
+    </ul>
+
+
+    <ul class="nav navbar-nav navbar-right">
+      <li ng-if="vm.name == -1"><a href=""><span class="glyphicon glyphicon-user"></span>登录</a></li>
+      <li ng-if="vm.name !== -1"><a href="javascript:;"><span class="glyphicon glyphicon-user"></span>{{vm.name}}</a></li>
+    </ul>
+  </div>
+</nav>
