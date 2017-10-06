@@ -8,7 +8,7 @@
   /** @ngInject */
   function runBlock($log,$rootScope,$state,$stateParams,$cookies,ROLE_SCHEME,roleNav) {
 
-    $log.debug('otarm is ready.');
+    $log.debug('ota is ready.');
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 
@@ -16,8 +16,8 @@
     var cname = $cookies.get('cname');
     var role = $cookies.get('role');
 
-    var ename = "chesterwan";
-    var cname = "万秋生";
+    var ename = "jack";
+    var cname = "杰克";
     var role = "ADMIN";
 
     $log.info("LOG[$cookies.ename]:",ename);

@@ -6,10 +6,7 @@
     .module('otaRm')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
-
     // 配置后端接口
-    // .constant('API_HOST',"http://naviotagray.wecar.wsd.com/otainner") //正式环境
-    //.constant('API_HOST',"http://naviotagray.sparta.html5.qq.com/otainner") //测试环境
 
    	// 用户权限配置
    	.constant('ROLE_SCHEME',{
