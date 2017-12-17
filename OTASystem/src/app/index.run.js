@@ -47,9 +47,6 @@
        if(!ename || !role || !cname){
            roleNav.nav = 'ADMIN';
            $log.info('LOG[you are admin!]');
-        // $log.info("LOG[未登录]:",ename)
-        //window.location.replace('http://passport.oa.com/modules/passport/signin.ashx?url=http://10.170.5.148:8080/otainner/account/login');
-        // window.location.replace('http://passport.oa.com/modules/passport/signin.ashx?url=http://tas.wecar.wsd.com/otainner/account/login');//need to modify
        }else {
          $log.info("LOG[已经登录]:",ename)
          if(role == "RD"){
@@ -86,7 +83,7 @@
 
          }else{
             //$state.go('home');
-            window.location.replace('http://naviotarm.wecar.wsd.com/otarm/403.html');
+            window.location.replace('403.html');
             //event.preventDefault();
          }
        }
