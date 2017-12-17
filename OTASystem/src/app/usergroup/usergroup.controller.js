@@ -18,11 +18,11 @@
     vm.userlevel = 100;
 
     vm.productType = {
-      1: '路畅',
-      2: '华阳',
-      3: '索菱',
-      4: '瑞联8001001',
-      5: '瑞联8001002a'
+      1: 'A',
+      2: 'B',
+      3: 'C',
+      4: 'D',
+      5: 'E'
     };
 
     vm.changeHint = function () {
