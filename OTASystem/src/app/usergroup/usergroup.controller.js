@@ -29,15 +29,15 @@
       $log.log('LOG[changeHint to]:', vm.type);
       var query;
       if (vm.type == 1) {
-          vm.systemName =  'Tencent-TAS-RR-A';
+          vm.systemName =  'A';
       } else if (vm.type == 2) {
-        vm.systemName =  'Tencent-TAS-ADAYO-A';
+        vm.systemName =  'B';
       } else if (vm.type == 3) {
-        vm.systemName =  'Tencent-TAS-Soling-A';
+        vm.systemName =  'C';
       } else if (vm.type == 4) {
-        vm.systemName =  'Tencent-TAS-RMTMP8001-A';
+        vm.systemName =  'D';
       }else if (vm.type == 5) {
-        vm.systemName =  'Tencent-TAS-RMTMP8001002a-A';
+        vm.systemName =  'E';
       }else {
         vm.systemName = 'all';
         return;
